@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* SVG */
+.character svg {
+    width: 250px;
+    height: auto;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.controls label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    gap: 5px;
+}
+
+.controls input {
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+}
