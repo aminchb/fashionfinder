@@ -12,106 +12,173 @@
     
     <!-- TODO : CHANGE THEME -->
     <style>
-        /* GLOBAL VARIABLES */
-        :root{
-            --main-color: #dde2e7;
-            --sub-color : #eee;
-            --text-color : black;
-            --navbar-style : italic;
-        }
+      /* GLOBAL VARIABLES */
+      :root{
+        --main-color: #dde2e7;
+        --sub-color : #eee;
+        --text-color : black;
+        --navbar-style : italic;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        /* WHOLE PAGE TEXT COLOR */
-        * {
-            margin: 0px;
-            padding: 0px;
-            font-family: Arial, sans-serif;
-            text-decoration: none;
-            box-shadow: none;
-            border: none;
+      /* WHOLE PAGE TEXT COLOR */
+      * {
+        margin: 0px;
+        padding: 0px;
+        font-family: Arial, sans-serif;
+        text-decoration: none;
+        box-shadow: none;
+        border: none;
 
-            color: var(--text-color);
-        }
+        color: var(--text-color);
+      }
 
-        .show {
-            display: flex;
-        }
+      .show {
+        display: flex;
+      }
 
-        .hidden {
-            display: none;
-        }
+      .hidden {
+        display: none;
+      }
 
-        /* PAGE BACKGROUND COLOR */
-        body {
-            height: 100vh;
-            background: linear-gradient(to bottom, var(--main-color), var(--sub-color), var(--main-color));
+      /* PAGE BACKGROUND COLOR */
+      body {
+        height: 100vh;
+        background: linear-gradient(to bottom, var(--main-color), var(--sub-color), var(--main-color));
 
-        }
+      }
 
-        body > * {
-            padding : 10px;
-        }
+      body > * {
+        padding : 10px;
+      }
 
-        /* NAVBAR STYLE */
-        nav {
-            font-style: var(--navbar-style);
-        }
+      /* NAVBAR STYLE */
+      nav {
+        font-style: var(--navbar-style);
+      }
 
-        .logo-text {
-            display: flex;
-        }
+      .logo-text {
+        display: flex;
+      }
 
-        .logo {
-            height: 30px;
-            margin-right: 5px;
-        }
+      .logo {
+        height: 30px;
+        margin-right: 5px;
+      }
 
-        main {
-            height: calc(100vh - 70px);
-            display: flex;   
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+      main {
+        height: calc(100vh - 70px);
+        display: flex;   
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
     </style>
 
     <!-- HERE : WEBSITE STYLE-->
     <style>
       .container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
       }
 
       /* SVG */
       .character svg {
-          width: 250px;
-          height: auto;
+        width: 250px;
+        height: auto;
       }
 
       /* Controls */
       .controls {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border: 5px solid black;
+        border-radius: 16px;
+        background: #ccc;
+        padding: 20px;
       }
 
       .controls label {
-          display: flex;
-          flex-direction: column;
-          font-weight: bold;
-          gap: 5px;
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        gap: 8px;
       }
 
-      .controls input {
-          width: 120px;
-          height: 40px;
-          cursor: pointer;
+      .color-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px;
+        height: 25px;
+        border-radius: 6px;
+        border: 2px solid black;
       }
+
+      .controls input[type="color"] {
+        -webkit-appearance: none;
+        appearance: none;
+
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        border: 2px solid black;
+        padding: 0;
+        cursor: pointer;
+        background: none;
+      }
+
+      /* Chrome, Edge, Safari */
+      .controls input[type="color"]::-webkit-color-swatch-wrapper {
+          padding: 0;
+      }
+
+      .controls input[type="color"]::-webkit-color-swatch {
+          border: none;
+          border-radius: 50%;
+      }
+
+      /* Firefox */
+      .controls input[type="color"]::-moz-color-swatch {
+          border: none;
+          border-radius: 50%;
+      }
+
+
+      .controls input[type="text"] {
+        width: 90px;
+        font-family: monospace;
+        background-color: #ccc;
+        border: none;
+        outline: none;
+      }
+
+      /* Important : focus & active */
+      .controls input[type="text"]:focus,
+      .controls input[type="text"]:active {
+        border: none;
+        outline: none;
+        box-shadow: none;
+      }
+      .controls button {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 2px solid black;
+        background: #eee;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .controls button:hover {
+        background: #ddd;
+      }
+
     </style>
 
 </head>
@@ -154,34 +221,158 @@
 
       <!-- CONTROLS -->
       <div class="controls">
-          <label>
-              Couleur du haut
-              <input type="color" id="topColor" value="#00ff00">
-          </label>
+        <label>
+            Top
+            <div class="color-row">
+                <input type="color" id="topColor" value="#00ff00">
+                <input type="text" id="topHex" value="#00ff00" maxlength="7">
+            </div>
+        </label>
 
-          <label>
-              Couleur du bas
-              <input type="color" id="bottomColor" value="#ff0000">
-          </label>
+        <label>
+            Bottom
+            <div class="color-row">
+                <input type="color" id="bottomColor" value="#ff0000">
+                <input type="text" id="bottomHex" value="#ff0000" maxlength="7">
+            </div>
+        </label>
+        <button id="randomBtn">Random</button>
       </div>
+
     </main>
-    <!-- SCRIPTS -->
-    <script>
-      const topInput = document.getElementById("topColor");
-      const bottomInput = document.getElementById("bottomColor");
+      <!-- SCRIPTS -->
+      <script>
+      const topColor = document.getElementById("topColor");
+      const bottomColor = document.getElementById("bottomColor");
+
+      const topHex = document.getElementById("topHex");
+      const bottomHex = document.getElementById("bottomHex");
 
       const topClothes = document.getElementById("topClothes");
       const bottomClothes = document.getElementById("bottomClothes");
 
-      topInput.addEventListener("input", () => {
-          topClothes.setAttribute("fill", topInput.value);
+      // Raccourcis couleurs
+      const colorShortcuts = {
+        black: "#000000",
+        white: "#ffffff",
+        grey: "#939393",
+        yellow: "#ffde59",
+        lyello: "#ffec9e",
+        beige: "#dcb075",
+        brown: "#6e2a00",
+        bordea: "#b50f0f",
+        red: "#ff0000",
+        pink: "#ff66c4",
+        lpink: "#ffa1db",
+        
+        purple: "#4e08a5",
+        lavend: "#c393ff",
+        lblue: "#a3f4ff",
+        cyan: "#5291fe",
+        blue: "#0000ff",
+        dblue: "#0000c0",
+        lgreen: "#77ff79",
+        green: "#00ff00",
+        dgreen: "#007a00",
+        
+        orange: "#ff751f",
+        mustar: "#c99700",
+        salmon: "##ff8282"
+      };
+
+      // Force toujours le #
+      function forceHexPrefix(input) {
+        if (!input.value.startsWith("#")) {
+          input.value = "#" + input.value.replace("#", "");
+        }
+      }
+
+      // Validation finale (Enter)
+      function validateColor(input, colorPicker, svgTarget) {
+        forceHexPrefix(input);
+
+        const value = input.value.slice(1).toLowerCase();
+
+        // Raccourci texte
+        if (colorShortcuts[value]) {
+          const hex = colorShortcuts[value];
+          input.value = hex;
+          colorPicker.value = hex;
+          svgTarget.setAttribute("fill", hex);
+          return;
+        }
+
+        // Hex valide
+        if (/^#[0-9a-fA-F]{6}$/.test(input.value)) {
+          colorPicker.value = input.value;
+          svgTarget.setAttribute("fill", input.value);
+        }
+      }
+
+      // Empêche le submit / comportement par défaut sur Enter
+      function handleEnter(e, input, picker, target) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          validateColor(input, picker, target);
+          input.blur(); // optionnel : retire le focus
+        }
+      }
+
+      // Color picker → hex + SVG
+      topColor.addEventListener("input", () => {
+        topHex.value = topColor.value;
+        topClothes.setAttribute("fill", topColor.value);
       });
 
-      bottomInput.addEventListener("input", () => {
-          bottomClothes.setAttribute("fill", bottomInput.value);
+      bottomColor.addEventListener("input", () => {
+        bottomHex.value = bottomColor.value;
+        bottomClothes.setAttribute("fill", bottomColor.value);
+      });
+
+      // Forcer # pendant la saisie
+      topHex.addEventListener("input", () => forceHexPrefix(topHex));
+      bottomHex.addEventListener("input", () => forceHexPrefix(bottomHex));
+
+      // Validation sur Enter
+      topHex.addEventListener("keydown", (e) => {
+        handleEnter(e, topHex, topColor, topClothes);
+      });
+
+      bottomHex.addEventListener("keydown", (e) => {
+        handleEnter(e, bottomHex, bottomColor, bottomClothes);
       });
     
+      const randomBtn = document.getElementById("randomBtn");
+
+      // Génère une couleur hex aléatoire
+      function randomHexColor() {
+        return (
+          "#" +
+          Math.floor(Math.random() * 0xffffff)
+            .toString(16)
+            .padStart(6, "0")
+        );
+      }
+
+      randomBtn.addEventListener("click", () => {
+        const topRandom = randomHexColor();
+        const bottomRandom = randomHexColor();
+
+        // Top
+        topColor.value = topRandom;
+        topHex.value = topRandom;
+        topClothes.setAttribute("fill", topRandom);
+
+        // Bottom
+        bottomColor.value = bottomRandom;
+        bottomHex.value = bottomRandom;
+        bottomClothes.setAttribute("fill", bottomRandom);
+      });
+
+    
     </script>
+
+
 
     <!-- END OF SCRIPTS -->
 </body>
