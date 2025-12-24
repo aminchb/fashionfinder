@@ -70,7 +70,7 @@
       }
 
       main {
-        height: calc(100vh - 70px);
+        height: calc(100vh - (3 * 70px));
         display: flex;   
         justify-content: center;
         align-items: center;
@@ -114,11 +114,17 @@
       .color-row {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
         padding: 5px;
         height: 25px;
         border-radius: 6px;
         border: 2px solid black;
+      }
+
+      .color-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .controls input[type="color"] {
@@ -179,7 +185,50 @@
         background: #ddd;
       }
 
+      .color-navbar {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      #colorShortcutsBar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .color-item {
+        width: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .color-square {
+        width: 26px;
+        height: 26px;
+        border: 2px solid black;
+        border-radius: 4px;
+      }
+
+      .lock-btn {
+        background: none;
+        font-size: 16px;
+        cursor: pointer;
+        line-height: 1;
+      }
+
+      .lock-btn.locked {
+        opacity: 0.6;
+      }
+
+
     </style>
+
 
 </head>
 <body>
@@ -194,10 +243,13 @@
             <h1>TEMPLATE</h1>
         </a>
     </nav>
+    <nav class="color-navbar">
+      <div id="colorShortcutsBar"></div>
+    </nav>
     <main class="container">
       <!-- IMAGE -->
       <div class="character">
-        <svg width="579" height="1167" viewBox="0 0 579 1167" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="579" height="800" viewBox="0 0 579 1167" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path id="topClothes" d="M296.846 521.687C265.853 526.855 234.994 527.79 204.077 527.743C194.274 527.727 184.47 527.496 174.444 527.08C174.83 526.53 175.595 526.413 176.02 525.971C178.408 523.486 180.715 520.922 183.05 518.386C180.047 517.041 177.132 514.813 174.026 514.502C159.182 513.017 145.014 509.008 131.094 503.935C129.484 503.348 127.664 502.255 126.8 500.863C115.054 481.95 103.459 462.943 91.8801 443.474C91.0217 428.525 90.1106 414.061 89.1996 399.596C87.9072 400.477 87.4581 401.351 87.0577 402.247C83.7701 409.605 83.0659 410.002 74.8706 409.132C74.2147 409.062 73.5474 409.099 72.4808 408.963C70.1221 408.504 68.1488 408.255 66.2171 407.821C45.5058 403.165 26.3616 394.683 8.13686 383.967C-1.51072 376.093 -1.6829 376.024 2.97042 364.507C15.6899 333.029 29.7187 302.174 48.1095 273.517C52.0543 267.37 56.7057 261.675 61.0722 255.801C70.2942 243.397 84.0353 238.095 97.6869 232.771C118.423 224.686 139.238 216.803 160.561 209.022C174.18 224.281 196.362 223.178 209.125 217.068C213.012 215.208 216.581 212.606 216.851 207.573C240.873 209.518 264.959 210.916 288.875 213.747C295.886 214.577 303.031 218.573 309.052 222.678C329.795 236.82 345.697 255.985 360.744 275.713C371.92 290.366 381.978 305.871 392.824 321.588C400.734 335.621 400.834 336.638 389.771 347.096C372.8 363.139 353.422 375.545 331.591 384.006C327.213 385.538 324.488 383.741 322.158 379.975C317.263 372.065 312.041 364.357 306.943 356.573C306.162 355.38 305.327 354.223 305.032 353.797C307.083 392.773 309.316 432.283 311.141 471.813C311.639 482.592 311.249 493.445 310.659 504.232C309.899 518.126 309.635 518.112 296.846 521.687Z" fill="#00FF00"/>
             <path id="bottomClothes" d="M101.805 1074.51C94.7104 1073.31 92.7078 1068.72 92.7591 1062.04C93.1349 1013.07 93.2773 964.098 93.6476 915.128C93.7483 901.802 94.3263 888.479 94.7723 875.158C96.2109 832.199 97.575 789.237 99.1872 746.284C100.662 706.999 102.378 667.721 104.07 628.444C105.388 597.822 106.833 567.206 108.458 536.368C109.462 537.608 110.056 539.196 111.027 540.504C116.402 547.74 121.653 555.09 127.47 561.959C128.773 563.497 132.147 563.386 134.607 563.804C136.31 564.094 138.216 563.599 139.794 564.143C143.135 565.292 145.109 564.899 147.069 561.974C147.079 561.941 147.003 561.974 147.171 561.496C151.542 562.678 155.334 562.148 158.795 559.105C159.545 558.446 160.779 557.882 161.723 557.973C169.229 558.696 172.877 553.847 175.715 548.179C178.054 543.507 176.201 538.287 171.187 536.952C167.956 536.093 164.177 537.296 159.78 537.643C158.162 535.349 155.889 532.127 153.812 528.701C154.129 528.352 154.251 528.208 154.807 528.097C161.4 527.836 167.558 527.542 174.192 527.306C184.47 527.496 194.274 527.727 204.077 527.743C234.994 527.79 265.853 526.855 296.445 521.811C298.275 555.058 300.059 588.307 301.947 621.55C304.44 665.428 307.049 709.3 309.541 753.178C311.07 780.106 312.418 807.043 313.944 833.971C316.101 872.032 318.37 910.087 320.545 948.147C322.017 973.91 323.414 999.678 324.835 1025.44C325.532 1038.08 326.062 1050.72 326.982 1063.34C327.256 1067.1 325.951 1068.73 322.494 1069.63C318.152 1070.75 313.915 1072.28 308.852 1073.73C306.948 1074.1 305.831 1074.4 304.699 1074.63C287.418 1078.08 269.974 1078.93 252.413 1077.86C249.275 1077.5 246.097 1076.64 243.007 1076.88C237.01 1077.36 235.996 1074.28 235.66 1069.17C233.519 1036.61 230.917 1004.09 228.826 971.534C226.094 929.002 223.621 886.452 221.181 843.902C219.589 816.142 218.281 788.365 216.797 760.598C214.613 719.698 212.367 678.801 210.189 637.901C209.605 626.939 209.171 615.968 208.671 605.036C202.509 604.525 201.325 605.438 201.118 611.167C200.375 631.805 199.689 652.445 199.002 673.084C197.523 717.527 196.118 761.972 194.566 806.412C193.351 841.195 192.09 875.978 190.616 910.751C188.754 954.672 186.696 998.584 184.623 1042.5C184.223 1050.97 183.285 1059.42 182.755 1067.89C182.502 1071.94 180.83 1074.54 176.665 1075.09C169.422 1076.04 162.171 1076.93 154.003 1077.84C148.626 1077.89 144.144 1078.27 139.718 1077.93C127.068 1076.94 114.441 1075.67 101.805 1074.51Z" fill="#FF0000"/>
             <path d="M153.856 1082.54C159.181 1082.81 163.266 1085.42 166.769 1089.25C174.512 1097.72 182.299 1106.16 190.099 1114.58C191.113 1115.67 192.209 1116.74 193.434 1117.58C205.776 1126 210.129 1138.21 209.968 1152.51C209.867 1161.48 208.107 1163.88 199.045 1164.55C183.959 1165.68 168.811 1166.81 153.707 1166.61C136.439 1166.38 119.172 1164.94 101.944 1163.54C94.3454 1162.93 92.9958 1161.59 92.4077 1153.95C90.8169 1133.29 91.5862 1112.7 96.601 1092.47C97.1065 1090.43 98.9103 1088.72 100.671 1087.06C103.206 1089.25 105.197 1091.22 107.154 1093.22C112.448 1098.64 119.651 1099.23 124.808 1094.28C132.967 1086.46 142.513 1082.35 153.856 1082.54Z" fill="#AAAAAA"/>
@@ -222,155 +274,226 @@
       <!-- CONTROLS -->
       <div class="controls">
         <label>
-            Top
+          <span>Top</span>
+
+          <div class="color-label">
+            <button class="lock-btn" id="lockTop">🔓</button>
+
             <div class="color-row">
-                <input type="color" id="topColor" value="#00ff00">
-                <input type="text" id="topHex" value="#00ff00" maxlength="7">
+              <input type="color" id="topColor" value="#00ff00">
+              <input type="text" id="topHex" value="#00ff00" maxlength="7">
             </div>
+          </div>
         </label>
 
+
         <label>
-            Bottom
+          <span>Bottom</span>
+
+          <div class="color-label">
+            <button class="lock-btn" id="lockBottom">🔓</button>
+
             <div class="color-row">
-                <input type="color" id="bottomColor" value="#ff0000">
-                <input type="text" id="bottomHex" value="#ff0000" maxlength="7">
+              <input type="color" id="bottomColor" value="#ff0000">
+              <input type="text" id="bottomHex" value="#ff0000" maxlength="7">
             </div>
+          </div>
         </label>
+
+
         <button id="randomBtn">Random</button>
       </div>
 
     </main>
       <!-- SCRIPTS -->
       <script>
-      const topColor = document.getElementById("topColor");
-      const bottomColor = document.getElementById("bottomColor");
+        const topColor = document.getElementById("topColor");
+        const bottomColor = document.getElementById("bottomColor");
 
-      const topHex = document.getElementById("topHex");
-      const bottomHex = document.getElementById("bottomHex");
+        const topHex = document.getElementById("topHex");
+        const bottomHex = document.getElementById("bottomHex");
 
-      const topClothes = document.getElementById("topClothes");
-      const bottomClothes = document.getElementById("bottomClothes");
+        const topClothes = document.getElementById("topClothes");
+        const bottomClothes = document.getElementById("bottomClothes");
 
-      // Raccourcis couleurs
-      const colorShortcuts = {
-        black: "#000000",
-        white: "#ffffff",
-        grey: "#939393",
-        yellow: "#ffde59",
-        lyello: "#ffec9e",
-        beige: "#dcb075",
-        brown: "#6e2a00",
-        bordea: "#b50f0f",
-        red: "#ff0000",
-        pink: "#ff66c4",
-        lpink: "#ffa1db",
-        
-        purple: "#4e08a5",
-        lavend: "#c393ff",
-        lblue: "#a3f4ff",
-        cyan: "#5291fe",
-        blue: "#0000ff",
-        dblue: "#0000c0",
-        lgreen: "#77ff79",
-        green: "#00ff00",
-        dgreen: "#007a00",
-        
-        orange: "#ff751f",
-        mustar: "#c99700",
-        salmon: "##ff8282"
-      };
+        const randomBtn = document.getElementById("randomBtn");
+        const shortcutsBar = document.getElementById("colorShortcutsBar");
 
-      // Force toujours le #
-      function forceHexPrefix(input) {
-        if (!input.value.startsWith("#")) {
-          input.value = "#" + input.value.replace("#", "");
-        }
-      }
+        const lockTopBtn = document.getElementById("lockTop");
+        const lockBottomBtn = document.getElementById("lockBottom");
 
-      // Validation finale (Enter)
-      function validateColor(input, colorPicker, svgTarget) {
-        forceHexPrefix(input);
+        // 🔒 États des cadenas
+        let lockTop = false;
+        let lockBottom = false;
 
-        const value = input.value.slice(1).toLowerCase();
+        // Raccourcis couleurs
+        const colorShortcuts = {
+          black: "#000000",
+          white: "#ffffff",
+          grey: "#939393",
+          yellow: "#ffde59",
+          lyello: "#ffec9e",
+          beige: "#dcb075",
+          brown: "#6e2a00",
+          bordea: "#b50f0f",
+          red: "#ff0000",
+          pink: "#ff66c4",
+          lpink: "#ffa1db",
 
-        // Raccourci texte
-        if (colorShortcuts[value]) {
-          const hex = colorShortcuts[value];
-          input.value = hex;
-          colorPicker.value = hex;
-          svgTarget.setAttribute("fill", hex);
-          return;
+          purple: "#4e08a5",
+          lavend: "#c393ff",
+          lblue: "#a3f4ff",
+          cyan: "#5291fe",
+          blue: "#0000ff",
+          dblue: "#0000c0",
+          lgreen: "#77ff79",
+          green: "#00ff00",
+          dgreen: "#007a00",
+
+          orange: "#ff751f",
+          mustar: "#c99700",
+          salmon: "#ff8282"
+        };
+
+        // Force toujours le #
+        function forceHexPrefix(input) {
+          if (!input.value.startsWith("#")) {
+            input.value = "#" + input.value.replace("#", "");
+          }
         }
 
-        // Hex valide
-        if (/^#[0-9a-fA-F]{6}$/.test(input.value)) {
-          colorPicker.value = input.value;
-          svgTarget.setAttribute("fill", input.value);
+        // Validation finale (Enter)
+        function validateColor(input, picker, svgTarget) {
+          forceHexPrefix(input);
+          const value = input.value.slice(1).toLowerCase();
+
+          // Raccourci texte
+          if (colorShortcuts[value]) {
+            const hex = colorShortcuts[value];
+            input.value = hex;
+            picker.value = hex;
+            svgTarget.setAttribute("fill", hex);
+            return;
+          }
+
+          // Hex valide
+          if (/^#[0-9a-fA-F]{6}$/.test(input.value)) {
+            picker.value = input.value;
+            svgTarget.setAttribute("fill", input.value);
+          }
         }
-      }
 
-      // Empêche le submit / comportement par défaut sur Enter
-      function handleEnter(e, input, picker, target) {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          validateColor(input, picker, target);
-          input.blur(); // optionnel : retire le focus
+        function handleEnter(e, input, picker, target) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            validateColor(input, picker, target);
+            input.blur();
+          }
         }
-      }
 
-      // Color picker → hex + SVG
-      topColor.addEventListener("input", () => {
-        topHex.value = topColor.value;
-        topClothes.setAttribute("fill", topColor.value);
-      });
+        // Color picker → hex + SVG
+        topColor.addEventListener("input", () => {
+          topHex.value = topColor.value;
+          topClothes.setAttribute("fill", topColor.value);
+        });
 
-      bottomColor.addEventListener("input", () => {
-        bottomHex.value = bottomColor.value;
-        bottomClothes.setAttribute("fill", bottomColor.value);
-      });
+        bottomColor.addEventListener("input", () => {
+          bottomHex.value = bottomColor.value;
+          bottomClothes.setAttribute("fill", bottomColor.value);
+        });
 
-      // Forcer # pendant la saisie
-      topHex.addEventListener("input", () => forceHexPrefix(topHex));
-      bottomHex.addEventListener("input", () => forceHexPrefix(bottomHex));
+        topHex.addEventListener("input", () => forceHexPrefix(topHex));
+        bottomHex.addEventListener("input", () => forceHexPrefix(bottomHex));
 
-      // Validation sur Enter
-      topHex.addEventListener("keydown", (e) => {
-        handleEnter(e, topHex, topColor, topClothes);
-      });
-
-      bottomHex.addEventListener("keydown", (e) => {
-        handleEnter(e, bottomHex, bottomColor, bottomClothes);
-      });
-    
-      const randomBtn = document.getElementById("randomBtn");
-
-      // Génère une couleur hex aléatoire
-      function randomHexColor() {
-        return (
-          "#" +
-          Math.floor(Math.random() * 0xffffff)
-            .toString(16)
-            .padStart(6, "0")
+        topHex.addEventListener("keydown", (e) =>
+          handleEnter(e, topHex, topColor, topClothes)
         );
-      }
 
-      randomBtn.addEventListener("click", () => {
-        const topRandom = randomHexColor();
-        const bottomRandom = randomHexColor();
+        bottomHex.addEventListener("keydown", (e) =>
+          handleEnter(e, bottomHex, bottomColor, bottomClothes)
+        );
 
-        // Top
-        topColor.value = topRandom;
-        topHex.value = topRandom;
-        topClothes.setAttribute("fill", topRandom);
+        // 🎲 Random
+        function randomHexColor() {
+          return (
+            "#" +
+            Math.floor(Math.random() * 0xffffff)
+              .toString(16)
+              .padStart(6, "0")
+          );
+        }
 
-        // Bottom
-        bottomColor.value = bottomRandom;
-        bottomHex.value = bottomRandom;
-        bottomClothes.setAttribute("fill", bottomRandom);
-      });
+        randomBtn.addEventListener("click", () => {
+          if (!lockTop) {
+            const topRandom = randomHexColor();
+            topColor.value = topRandom;
+            topHex.value = topRandom;
+            topClothes.setAttribute("fill", topRandom);
+          }
 
-    
-    </script>
+          if (!lockBottom) {
+            const bottomRandom = randomHexColor();
+            bottomColor.value = bottomRandom;
+            bottomHex.value = bottomRandom;
+            bottomClothes.setAttribute("fill", bottomRandom);
+          }
+        });
+
+        // 🔒 Cadenas
+        lockTopBtn.addEventListener("click", () => {
+          lockTop = !lockTop;
+          lockTopBtn.textContent = lockTop ? "🔒" : "🔓";
+          lockTopBtn.classList.toggle("locked", lockTop);
+        });
+
+        lockBottomBtn.addEventListener("click", () => {
+          lockBottom = !lockBottom;
+          lockBottomBtn.textContent = lockBottom ? "🔒" : "🔓";
+          lockBottomBtn.classList.toggle("locked", lockBottom);
+        });
+
+        // 🎨 Navbar couleurs (UNE SEULE FOIS)
+        Object.entries(colorShortcuts).forEach(([name, hex]) => {
+          const item = document.createElement("div");
+          item.className = "color-item";
+
+          const label = document.createElement("span");
+          label.textContent = "#" + name;
+
+          const square = document.createElement("div");
+          square.className = "color-square";
+          square.style.backgroundColor = hex;
+
+          item.addEventListener("click", () => {
+            if (!lockTop && !lockBottom) {
+              topColor.value = hex;
+              topHex.value = hex;
+              topClothes.setAttribute("fill", hex);
+
+              bottomColor.value = hex;
+              bottomHex.value = hex;
+              bottomClothes.setAttribute("fill", hex);
+              return;
+            }
+
+            if (!lockTop) {
+              topColor.value = hex;
+              topHex.value = hex;
+              topClothes.setAttribute("fill", hex);
+            }
+
+            if (!lockBottom) {
+              bottomColor.value = hex;
+              bottomHex.value = hex;
+              bottomClothes.setAttribute("fill", hex);
+            }
+          });
+
+          item.appendChild(label);
+          item.appendChild(square);
+          shortcutsBar.appendChild(item);
+        });
+      </script>
 
 
 
