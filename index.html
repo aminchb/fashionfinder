@@ -226,6 +226,12 @@
         opacity: 0.6;
       }
 
+      .color-row input:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+
 
     </style>
 
@@ -442,14 +448,20 @@
         // 🔒 Cadenas
         lockTopBtn.addEventListener("click", () => {
           lockTop = !lockTop;
+
           lockTopBtn.textContent = lockTop ? "🔒" : "🔓";
           lockTopBtn.classList.toggle("locked", lockTop);
+
+          setInputsDisabled(lockTop, topColor, topHex);
         });
 
         lockBottomBtn.addEventListener("click", () => {
           lockBottom = !lockBottom;
+
           lockBottomBtn.textContent = lockBottom ? "🔒" : "🔓";
           lockBottomBtn.classList.toggle("locked", lockBottom);
+
+          setInputsDisabled(lockBottom, bottomColor, bottomHex);
         });
 
         // 🎨 Navbar couleurs (UNE SEULE FOIS)
@@ -493,10 +505,13 @@
           item.appendChild(square);
           shortcutsBar.appendChild(item);
         });
+
+        function setInputsDisabled(isLocked, colorInput, hexInput) {
+          colorInput.disabled = isLocked;
+          hexInput.disabled = isLocked;
+        }
+
       </script>
-
-
-
     <!-- END OF SCRIPTS -->
 </body>
 </html>
